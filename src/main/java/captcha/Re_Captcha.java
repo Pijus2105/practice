@@ -2,6 +2,7 @@ package captcha;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -9,6 +10,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.io.FileHandler;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -20,12 +22,17 @@ public class Re_Captcha {
 	public static void main(String[] args) throws IOException, Exception {
 
 
+		WebDriver driver;
 		WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+		ChromeOptions option = new ChromeOptions();
+		option.addArguments("--remote-allow-origins=*");
+		driver = new ChromeDriver(option);
+		
         try {
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        	driver.manage().window().maximize();
+    		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            
         
         
         driver.get("https://www.irctc.co.in/nget/train-search"); 
